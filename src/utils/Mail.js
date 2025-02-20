@@ -6,18 +6,17 @@ const MailTransporter = nodemailer.createTransport({
     secure:false,
     auth:{
         user:"kushbhardwaj8800@gmail.com",
-        pass:"pysgnwbtxsmsyema"
+        pass:"ddzwphjzybzctsrc"
     }
 })
 
 async function SentMail(to,subject,text,html){
     const info   = await MailTransporter.sendMail({
-        from:"kushbhardwaj8800@gmail.com",
+        from:"MegazStroe",
         to:to,
         subject:subject,
         text:text,
         html:html
     })
-    console.log("Otp sent in your mail")
 }
 module.exports = SentMail;

@@ -7,22 +7,23 @@ const { ObjectId } = require('mongodb')
 const CustomerModel = require('../model/CustomerAccountModel');
 const { genPassword, commparePassowrd } = require('../utils/EncrypPassword');
 const VerifyAccount = require('../utils/Mail')
+
 exports.signup = async (req, res, next) => {
     try {
+        const origin = `${req.protocol}://${req.get('host')}`
         const signupData = {
             custumerName: req.body.name,
             custumerEmail: req.body.email,
             custumerPassword: genPassword(req.body.password),
             custumerMobile: req.body.mobile
         }
-
         const resData = await CustomerModel.create(signupData)
         if (resData) {
             const sentHTML = `<html>
                     <body>
                             <h1 style="color:red;">${resData.custumerName}</h1>
                             <p>Welcome ${resData.custumerName}</p>
-                            <span>click on link to verify <a href='${window.location.origin}/api/auth/customer/verify/${resData._id}'>Verify here<a/></span>
+                            <span>click on link to verify <a href='${origin}/api/auth/customer/verify/${resData._id}'>Verify here<a/></span>
                     </body>
             </html>`
             VerifyAccount(resData.custumerEmail, "Signup Success", " ", sentHTML)
@@ -50,7 +51,7 @@ exports.signup = async (req, res, next) => {
             res.json({
                 status: "failed",
                 message: "unable to signup",
-                error: err
+                error: err.message
             })
         }
     }

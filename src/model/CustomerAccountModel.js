@@ -10,7 +10,7 @@ const CustomerSchema = mongoose.Schema({
     custumerEmail :{type:String,required:[true,"customer email require"],unique:true},
     custumerPassword :{type:String,required:[true,"customer password require"]},
     custumerMobile :{type:String,required:[true,"customer phoner number require"],unique:true},
-    customer_status:{type:Number,default:0},
+    customer_status:{type:Number,default:1},
     customerAddress:{
         type:[{name:{type:String}, mobile:{type:String},address:{type:String},pincode:{type:Number}, locality:{type:String},city:{type:String}, state:{type:String},landmark:{type:String},alternate_phone:{type:String}}
             
