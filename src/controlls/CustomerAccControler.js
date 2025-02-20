@@ -22,7 +22,7 @@ exports.signup = async (req, res, next) => {
                     <body>
                             <h1 style="color:red;">${resData.custumerName}</h1>
                             <p>Welcome ${resData.custumerName}</p>
-                            <span>click on link to verify <a href='https://deployeapp.onrender.com/api/auth/customer/verify/${resData._id}'>Verify here<a/></span>
+                            <span>click on link to verify <a href='${window.location.origin}/api/auth/customer/verify/${resData._id}'>Verify here<a/></span>
                     </body>
             </html>`
             VerifyAccount(resData.custumerEmail, "Signup Success", " ", sentHTML)
