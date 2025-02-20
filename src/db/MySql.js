@@ -3,7 +3,7 @@ const mysql = require('mysql')
 const connectConection = mysql.createConnection({
     host:process.env.SqlHost,
     user:process.env.SqlUser,
-    password:process.env.SqlPassword,
+    password:"",
     database:process.env.SqlDB
 });
 connectConection.connect((err)=>{
