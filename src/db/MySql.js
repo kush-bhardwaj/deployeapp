@@ -18,5 +18,5 @@ connectConection.connect((err)=>{
     //     console.log(result)
     // })
     // console.log('MySql Connected')
-})
+}) //
 module.exports = connectConection;
