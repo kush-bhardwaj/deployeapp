@@ -22,6 +22,9 @@ app.use(express.json({ limit: '100mb' }))
 app.use(express.urlencoded({ limit: '100mb', extended: true }));
 app.use('/image', express.static('./public/upload'))
 
+app.get('/',(req,res)=>{
+    res.json({server:"live",issue:false})
+})
 app.get("/karonasaiyacall", async function (req, res) {
     const re = await fetch("https://reqres.in/api/users?page=2")
     const data = await re.json();
@@ -43,7 +46,6 @@ app.use("/assets", express.static('./public/static'));
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
-
 
 app.use('/api/auth', AdminAccRouter);
 app.use('/api/auth/customer', CustumerRouter)
