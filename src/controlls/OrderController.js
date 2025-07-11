@@ -45,8 +45,6 @@ exports.PlaceOrder = async(req, res ,next)=>{
                         if(details.paymentOption ==='ONLINE'){
                             details.paymentDone =true 
                         }
-                    console.log("details",details);
-
                       const AddOrder = await OrderModel.create(details);
                        if(AddOrder){
                             await CartModel.deleteMany({userId:req.user_id})
@@ -83,11 +81,19 @@ exports.PlaceOrder = async(req, res ,next)=>{
 
 //get order 
 exports.GetOrderDetails = async(req, res)=>{
-    const Order = await OrderModel.find({})
+    try{
+        const Order = await OrderModel.find({})
     if(Order){
         res.json({
             status:"true",
             data:Order
+        })
+    }
+    }catch(err){
+        return res.json(500)
+        .json({
+            status:"failed",
+            message:err.message
         })
     }
 }

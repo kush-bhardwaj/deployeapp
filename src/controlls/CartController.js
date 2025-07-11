@@ -166,7 +166,8 @@ exports.DescreaseQunatity = async (req, res, next) => {
 //delete cart api
 
 exports.DeleteCart = async function (req, res, next) {
-    const userid=req.user_id
+    try{
+        const userid=req.user_id
     const productid = req.params.id
     const FindProduct = await cartModel.findOne({$and:[{userId:userid},{productId:productid}]})
     if(FindProduct){
@@ -187,6 +188,10 @@ exports.DeleteCart = async function (req, res, next) {
             status:"failed",
             message:"something went wrong to delete"
         })
+    }
+    }catch(err){
+        return res.status(500)
+        .json({status:"failed",message:err.message})
     }
 }
 

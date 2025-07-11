@@ -98,7 +98,8 @@ exports.getAllProducts = async function (req, res, next) {
 //getProdut By Id
 
 exports.getProductById = async (req, res, next) => {
-    const query = { _id: req.params }
+   try{
+     const query = { _id: req.params }
     const find = { $and: [{ productCat_Id: new ObjectId(query._id) }] }
     const findData = await ProductModel.find(find)
     if (findData) {
@@ -108,6 +109,13 @@ exports.getProductById = async (req, res, next) => {
             data: findData
         })
     }
+   }catch(err){
+    return res.status(500)
+    .json({
+        status:false,
+        message:err.message
+    })
+   }
 }
 
 //getProduct by id end
