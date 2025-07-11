@@ -14,7 +14,7 @@ exports.signup = async function (req, res, next) {
         if (resData) {
             res.json({
                 status: "success",
-                message: "admin signup success please check your mail for confirm",
+                message: "admin signup success",
                 data: resData
             })
         }
